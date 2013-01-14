@@ -1,0 +1,55 @@
+<link rel="stylesheet" type="text/css" href="css/ajax.css">
+<script src='js/json2.js'></script>
+<script src='js/jquery.min.js'></script>
+<script src='js/jstorage.js'></script>
+<script src='js/ajax.js'></script>
+<script src='js/main.js'></script> <!-- here mian js -->
+
+
+<div id='tableResult'>
+  <table>
+	<thead class='head'>
+		
+	</thead>
+	<tbody class='row'>
+
+	</tbody>
+	</table>
+	<loading></loading>
+</div>
+
+<div id='form'>
+		<h3>CARI  dataMahasiswa</h3>
+		NIM : <input type='text' id='nim'/>	<button id='cari'>cari</button></br>
+		<p>
+		<form action='http://boxapps.net/testAPI/new.php?table=dataMahasiswa' id='formDataMhs'>
+			<h3>TAMBAH  dataMahasiswa</h3>
+			Nim : <input type='text' name='nim'/> <br/>
+			Nama : <input type='text' name='nama'/> <br/>
+			Alamat : <input type='text' name='alamat'/> 
+			<input type='button' id='tambah' value='tambah'>
+
+		</form>
+		</p>
+</div>
+
+<script>
+	$(document).ready(function(){
+		//load dataMahasiswa to table
+		loadTable('tableResult','dataMahasiswa','');
+		$('#form #cari').click(function(){
+			//cari MHS
+			loadTable('tableResult','dataMahasiswa','nim="'+$('#form #nim').val()+'"');
+		});
+		$('#form #tambah').click(function(){
+
+			sendDataForm('formDataMhs',function(data){
+				//reload table result
+				console.log(data);
+				loadTable('tableResult','dataMahasiswa','');
+			});
+			
+		});
+
+	});
+</script>
